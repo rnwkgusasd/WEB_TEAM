@@ -2,17 +2,23 @@
   <v-container fluid>
     <v-slide-y-transition mode="out-in">
       <v-layout column align-center>
-        <v-btn @click.stop="dialog=true">로그인</v-btn>
-        <v-dialog
-      v-model="dialog"
-      max-width="290"
-    >
-      <v-layout row wrap align-center>
-      <v-flex xs12>
-        <v-toolbar flat>
-         <v-toolbar-title>로그인</v-toolbar-title>
-       </v-toolbar>
-        <v-card>
+        <v-btn outline color="indigo" @click="mdUp">Login</v-btn>
+        <img src="@/assets/logo.png" alt="Vuetify.js" class="mb-5">
+        <blockquote>
+          &#8220;First, solve the problem. Then, write the code.&#8221;
+          <footer>
+            <small>
+              <em>&mdash;John Johnson</em>
+            </small>
+          </footer>
+        </blockquote>
+        
+      </v-layout>
+    </v-slide-y-transition>
+
+
+    <v-dialog v-model="dialog" persistent max-width="500px">
+    <v-card>
           <div class="pa-3">
             <v-text-field
                 v-model="email"
@@ -35,26 +41,18 @@
             <v-btn
              large
              block
-             color="primary"
+             color="warning"
              to="/signup"
             >회원가입</v-btn>
+            <v-btn
+             large
+             block
+             color="error"
+             @click.native="dialog = false"
+            >닫기</v-btn>
           </div>
         </v-card>
-      </v-flex>
-    </v-layout>
-    </v-dialog>
-        <img src="@/assets/logo.png" alt="Vuetify.js" class="mb-5">
-        <blockquote>
-          &#8220;First, solve the problem. Then, write the code.&#8221;
-          <footer>
-            <small>
-              <em>&mdash;John Johnson</em>
-            </small>
-          </footer>
-        </blockquote>
-        
-      </v-layout>
-    </v-slide-y-transition>
+  </v-dialog>
   </v-container>
 </template>
 
@@ -62,13 +60,13 @@
 export default {
   data () {
     return {
-      dialog: false,
       email: null,
       password: null,
       allUsers: [
         {id:1, name: 'genie', email:'genie@geniesoft.io', password:'12345'},
         {id:2, name: 'test', email:'test@geniesoft.io', password:'12345'}
-      ]
+      ],
+      dialog: false
     }
   },
   methods: {
@@ -84,11 +82,15 @@ export default {
           alert('이메일과 비밀번호가 일치하지 않습니다.')
           else{
           alert('로그인 완료')
+          this.dialog = false
         }
       }
       // 그 유저의 비밀번호와 입력된 비밀번호를 비교한다.
       console.log(this.email, this.password)
-      this.dialog=false
+    },
+    mdUp () {
+      // console.log('mdup')
+      this.dialog = true
     }
   }
 }
