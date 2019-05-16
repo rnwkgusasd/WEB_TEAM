@@ -44,18 +44,28 @@ export default {
     return {
       email: null,
       password: null,
-      allUsers: [
-        {id:1, name: 'genie', email:'genie@geniesoft.io', password:'12345'},
-        {id:2, name: 'test', email:'test@geniesoft.io', password:'12345'}
-      ]
+      allUsers: []
     }
   },
+  mounted() {
+    this.getAllusers()
+  },
   methods: {
+    getAllusers() {
+      axios.get('http://localhost:3000/api/signup')
+      .then((r) => {
+        this.allUsers = r.data.users
+        console.log(r);
+      })
+      .catch((e) => {
+        console.error(e.message)
+      })
+    },
     login() {
       // 전체 유저에서 해당 이메일로 유저를 찾는다.
       let selectUser = null
       this.allUsers.forEach(user =>{
-        if(user.email === this.email) selectUser = user
+        if(user.userID === this.email) selectUser = user
       })
       if (selectUser === null) alert('입력하신 이메일이 없습니다')
         else{

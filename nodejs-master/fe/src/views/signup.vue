@@ -61,8 +61,27 @@
 <script>
   import { validationMixin } from 'vuelidate'
   import { required, maxLength, email, password } from 'vuelidate/lib/validators'
+  import axios from 'axios'
 
   export default {
+    data () {
+      return{
+        name: '',
+        email: '',
+        sex: '',
+        userID: '',
+        userPW: '',
+        select: null,
+        items: [
+          'Male',
+          'Female'
+        ],
+        checkbox: false
+      }
+    },
+    mounted() {
+      this.getUsers()
+    },
     mixins: [validationMixin],
 
     validations: {
@@ -80,6 +99,9 @@
     data: () => ({
       name: '',
       email: '',
+      sex: '',
+      userID: '',
+      userPW: '',
       select: null,
       items: [
         'Male',
@@ -119,10 +141,22 @@
 
     methods: {
       submit () {
-        this.$v.$touch()
+        // this.$v.$touch()
+        axios.post('http://localhost:3000/api/signup', {
+          name: this.name,
+          sex: this.select,
+          userID: this.email,
+          userPW: this.password
+        })
+          .then((r) => {
+            console.log("회원가입 완료")
+          })
+          .catch((e) => {
+            console.error(e.message)
+          })
       },
       clear () {
-        this.$v.$reset()
+        // this.$v.$reset()
         this.name = ''
         this.email = ''
         this.password = ''

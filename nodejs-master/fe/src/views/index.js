@@ -1,7 +1,8 @@
 var express = require('express');
 var createError = require('http-errors');
 var router = express.Router();
-const User = require('../../../models/users')
+const User = require('../../../be/models/users')
+const UserModel = require('../../../be/models/users')
 
 
 // router.get('/', function(req, res, next) {
@@ -38,6 +39,22 @@ module.exports = router;
   // res.send({ users: us })
 });
 
+router.get('/', function(req, res, next) {
+
+  Signup.find()
+    .then(r => {
+      res.send({ success : true, users: r})
+    })
+    .catch(e => {
+      res.send({ success : false})
+    })
+
+// console.log(req.query)
+// console.log(req.body)
+//
+// res.send({ users: us })
+});
+
 router.post('/', (req, res, next) => {
 
   const { name, age } = req.body
@@ -53,6 +70,24 @@ router.post('/', (req, res, next) => {
   // console.log(req.query)
   // console.log(req.body)
   // res.send({ success: true, msg: 'post ok' })
+})
+
+
+router.post('/', (req, res, next) => {
+
+  const { name, sex, userID, userPW } = req.body
+  const u = new Signup({ name, sex, userID, userPW })
+    u.save()
+      .then(r => {
+        res.send({ success: true, msg: r })
+      })
+      .catch(e => {
+        res.send({ success: false, msg: e.message })
+      })
+
+  console.log(req.query)
+  console.log(req.body)
+  res.send({ success: true, msg: 'post ok' })
 })
 
 router.put('/', (req, res, next) => {
