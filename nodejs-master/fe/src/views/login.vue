@@ -25,6 +25,12 @@
              color="primary"
              @click="login()"
             >로그인</v-btn>
+            <v-btn
+             large
+             block
+             color="primary"
+             to="/signup"
+            >회원가입</v-btn>
           </div>
         </v-card>
       </v-flex>
