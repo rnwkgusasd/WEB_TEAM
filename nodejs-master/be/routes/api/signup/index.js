@@ -17,11 +17,6 @@ router.get('/', function(req, res, next) {
       .catch(e => {
         res.send({ success : false})
       })
-
-  // console.log(req.query)
-  // console.log(req.body)
-  //
-  // res.send({ users: us })
 });
 
 router.post('/', (req, res, next) => {
@@ -35,10 +30,6 @@ router.post('/', (req, res, next) => {
         .catch(e => {
           res.send({ success: false, msg: e.message })
         })
-  
-    console.log(req.query)
-    console.log(req.body)
-    res.send({ success: true, msg: 'post ok' })
   });
 
 router.all('*', function(req, res, next) {
