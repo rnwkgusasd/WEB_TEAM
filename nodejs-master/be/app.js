@@ -58,6 +58,7 @@ module.exports = app;
 const mongoose = require('mongoose')
 
 const User = require('./models/users')
+const UserData = require('./models/signupM')
 // console.log(User)
 
 // 데이터 스키마 설정
