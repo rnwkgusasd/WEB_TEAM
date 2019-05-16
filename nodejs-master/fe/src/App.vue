@@ -100,6 +100,11 @@ export default {
           icon: 'face',
           title: 'login',
           to: '/login'
+        },
+        {
+          icon: 'edit',
+          title: 'signup',
+          to: '/signup'
         }
       ],
       miniVariant: false,
