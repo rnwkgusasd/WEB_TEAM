@@ -117,7 +117,7 @@
         !this.$v.email.required && errors.push('E-mail is required')
         return errors
       },
-      passwordErrors () {
+      passwordErrors () {//비밀번호 제약 걸기
         const errors = []
         if (!this.$v.password.$dirty) return errors
         !this.$v.password.alphaNum && errors.push('Must be valid password')
