@@ -53,26 +53,22 @@ export default {
   },
   methods: {
     getAllusers() {
-      alert('getAllusers')
       axios.get('http://localhost:3000/api/signup')
       .then((r) => {
-        alert('실행')
         this.allUsers = r.data.users
         console.log(r);
       })
       .catch((e) => {
-        alert('실행 안됨')
         console.error(e.message)
         
       })
-      alert('get 끝')
     },
     login() {
       // 전체 유저에서 해당 이메일로 유저를 찾는다.
       let selectUser = null
       console.log(this.allUsers)
       this.allUsers.forEach(user =>{
-        alert(user.userID)
+        console.log(user.userID)
         if(user.userID === this.email) selectUser = user
       })
       if (selectUser === null) alert('입력하신 이메일이 없습니다')

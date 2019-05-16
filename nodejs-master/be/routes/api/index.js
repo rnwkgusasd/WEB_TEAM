@@ -25,7 +25,6 @@ router.post('/users', function(req, res, next) {
 
 router.use('/test', require('./test'));
 router.use('/user', require('./user'));
-router.use('/data', require('./data'));
 router.use('/signup',require('./signup'));
 
 router.all('*', function(req, res, next) {

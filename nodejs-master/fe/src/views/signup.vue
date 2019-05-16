@@ -29,8 +29,8 @@
       :error-messages="passwordErrors"
       label="Password"
       required
-      @input="$v.pw.$touch()"
-      @blur="$v.pw.$touch()"
+      @input="$v.password.$touch()"
+      @blur="$v.password.$touch()"
     ></v-text-field>
     <v-select
       v-model="select"
@@ -81,7 +81,6 @@
       }
     },
     mounted() {
-      this.getUsers()
     },
     mixins: [validationMixin],
 
@@ -156,11 +155,13 @@
           userID: this.email,
           userPW: this.password
         })
+        console.log(this.name, this.select, this.email, this.password)
           .then((r) => {
             alert("회원가입을 축하합니다.")
             location.replace('/')
           })
           .catch((e) => {
+            alert("회원가입 실패")
             alert(e.message)
           })
         }
