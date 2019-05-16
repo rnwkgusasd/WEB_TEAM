@@ -147,7 +147,9 @@
 
     methods: {
       submit () {
-        // this.$v.$touch()
+        this.$v.$touch()
+
+        if(!(this.$v.$pending || this.$v.$error)){
         axios.post('http://localhost:3000/api/signup', {
           name: this.name,
           sex: this.select,
@@ -155,14 +157,16 @@
           userPW: this.password
         })
           .then((r) => {
-            console.log("회원가입 완료")
+            alert("회원가입을 축하합니다.")
+            location.replace('/')
           })
           .catch((e) => {
-            console.error(e.message)
+            alert(e.message)
           })
+        }
       },
       clear () {
-        // this.$v.$reset()
+        this.$v.$reset()
         this.name = ''
         this.email = ''
         this.password = ''
