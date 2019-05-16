@@ -59,7 +59,7 @@ const mongoose = require('mongoose')
 
 const User = require('./models/users')
 const UserData = require('./models/signupM')
-// console.log(User)
+//console.log(User)
 
 // 데이터 스키마 설정
 // const userSchema = new mongoose.Schema({
@@ -77,6 +77,7 @@ mongoose.connect('mongodb://localhost:27017/local', { useNewUrlParser: true }, (
    // User.create({ name: '하하' })
    //     .then(r => console.log(r))
    //      .catch(e => console.error(e))
+    
 
    //읽기
    // User.find()
@@ -104,3 +105,5 @@ mongoose.connect('mongodb://localhost:27017/local', { useNewUrlParser: true }, (
   //     .catch(e => console.error(e))
 
 })
+
+
