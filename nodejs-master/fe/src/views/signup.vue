@@ -155,7 +155,6 @@
           userID: this.email,
           userPW: this.password
         })
-        console.log(this.name, this.select, this.email, this.password)
           .then((r) => {
             alert("회원가입을 축하합니다.")
             location.replace('/')
