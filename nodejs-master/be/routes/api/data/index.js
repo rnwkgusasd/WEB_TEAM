@@ -8,11 +8,11 @@ router.get('/', function(req, res, next) {
   const us = [
     {
       name: '테스트1',
-      age: 14
+      sex: 14
     },
     {
       name: '테스트2',
-      age: 24
+      sex: 24
     }
   ]
   res.send({ users: us })
@@ -40,8 +40,8 @@ module.exports = router;
 
 router.post('/', (req, res, next) => {
 
-  const { name, age, userID, userPW } = req.body
-  const u = new User({ name, age, userID, userPW })
+  const { name, sex, userID, userPW } = req.body
+  const u = new User({ name, sex, userID, userPW })
     u.save()
       .then(r => {
         res.send({ success: true, msg: r })
@@ -57,8 +57,8 @@ router.post('/', (req, res, next) => {
 
 router.put('/:id', (req, res, next) => {
   const id = req.params.id
-  const { name, age, userID, userPW } = req.body
-  User.updateOne({ _id: id }, { $set: { name, age, userID, userPW }})
+  const { name, sex, userID, userPW } = req.body
+  User.updateOne({ _id: id }, { $set: { name, sex, userID, userPW }})
     .then(r => {
       res.send({ success: true, msg: r })
     })

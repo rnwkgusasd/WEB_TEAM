@@ -28,8 +28,8 @@
       v-model="password"
       label="PassWord"
       required
-      @input="$v.email.$touch()"
-      @blur="$v.email.$touch()"
+      @input="$v.pw.$touch()"
+      @blur="$v.pw.$touch()"
     ></v-text-field>
     <v-select
       v-model="select"
