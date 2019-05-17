@@ -148,6 +148,14 @@
       submit () {
         this.$v.$touch()
 
+        var NumCheck = this.password.search(/[0-9]/g)
+        var EngCheck = this.password.search(/[a-zA-Z]/g)
+
+        if(NumCheck < 0 || EngCheck < 0) {
+          alert('비밀번호에 영문과 숫자를 같이 써 넣어주세요.')
+          return false;
+        }
+
         if(!(this.$v.$pending || this.$v.$error)){
         axios.post('http://localhost:3000/api/signup', {
           name: this.name,

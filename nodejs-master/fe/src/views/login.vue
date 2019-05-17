@@ -72,10 +72,10 @@ export default {
         if(user.userID === this.email) selectUser = user
       })
       if (selectUser === null) alert('입력하신 이메일이 없습니다')
-        else{
+      else{
         if(selectUser.userPW !== this.password)
           alert('이메일과 비밀번호가 일치하지 않습니다.')
-          else{
+        else{
           alert('로그인 완료')
           location.replace('/')
         }
