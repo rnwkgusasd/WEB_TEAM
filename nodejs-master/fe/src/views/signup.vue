@@ -8,15 +8,6 @@
     <v-card class="pa-5">
       <div>
       <v-text-field
-      v-model="name"
-      :error-messages="nameErrors"
-      :counter="10"
-      label="Name"
-      required
-      @input="$v.name.$touch()"
-      @blur="$v.name.$touch()"
-    ></v-text-field>
-    <v-text-field
       v-model="email"
       :error-messages="emailErrors"
       label="E-mail"
@@ -29,8 +20,25 @@
       :error-messages="passwordErrors"
       label="Password"
       required
-      @input="$v.password.$touch()"
-      @blur="$v.password.$touch()"
+      @input="$v.pw.$touch()"
+      @blur="$v.pw.$touch()"
+    ></v-text-field>
+      <v-text-field
+      v-model="name"
+      :error-messages="nameErrors"
+      :counter="10"
+      label="Name"
+      required
+      @input="$v.name.$touch()"
+      @blur="$v.name.$touch()"
+    ></v-text-field>
+    <v-text-field
+      v-model="age"
+      :error-messages="ageErrors"
+      label="Age"
+      required
+      @input="$v.age.$touch()"
+      @blur="$v.age.$touch()"
     ></v-text-field>
     <v-select
       v-model="select"
@@ -61,7 +69,7 @@
 
 <script>
   import { validationMixin } from 'vuelidate'
-  import { required, maxLength, email, alphaNum } from 'vuelidate/lib/validators'
+  import { required, maxLength, email, alphaNum, numeric } from 'vuelidate/lib/validators'
   import axios from 'axios'
 
   export default {
@@ -70,6 +78,7 @@
         name: '',
         email: '',
         sex: '',
+        age: '',
         userID: '',
         userPW: '',
         select: null,
@@ -81,6 +90,7 @@
       }
     },
     mounted() {
+      this.getUsers()
     },
     mixins: [validationMixin],
 
@@ -88,6 +98,7 @@
       name: { required, maxLength: maxLength(10) },
       email: { required, email },
       password: { required, alphaNum },
+      age:{required, numeric},
       select: { required },
       checkbox: {
         checked (val) {
@@ -99,6 +110,7 @@
     data: () => ({
       name: '',
       email: '',
+      age:'',
       password: '',
       select: null,
       items: [
@@ -128,6 +140,13 @@
         !this.$v.name.required && errors.push('Name is required.')
         return errors
       },
+      ageErrors () {
+        const errors = []
+        if (!this.$v.age.$dirty) return errors
+        !this.$v.age.numeric && errors.push('Age must be number')
+        !this.$v.age.required && errors.push('Age is required.')
+        return errors
+      },
       emailErrors () {
         const errors = []
         if (!this.$v.email.$dirty) return errors
@@ -135,7 +154,7 @@
         !this.$v.email.required && errors.push('E-mail is required')
         return errors
       },
-      passwordErrors () {//비밀번호 제약 걸기
+      passwordErrors () {
         const errors = []
         if (!this.$v.password.$dirty) return errors
         !this.$v.password.alphaNum && errors.push('Must be valid password')
@@ -160,6 +179,7 @@
         axios.post('http://localhost:3000/api/signup', {
           name: this.name,
           sex: this.select,
+          age:this.age,
           userID: this.email,
           userPW: this.password
         })
@@ -168,7 +188,6 @@
             location.replace('/')
           })
           .catch((e) => {
-            alert("회원가입 실패")
             alert(e.message)
           })
         }

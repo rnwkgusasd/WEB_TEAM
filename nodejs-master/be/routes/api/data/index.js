@@ -40,8 +40,8 @@ module.exports = router;
 
 router.post('/', (req, res, next) => {
 
-  const { name, age, userID, userPW } = req.body
-  const u = new User({ name, age, userID, userPW })
+  const { name, sex, age, userID, userPW } = req.body
+  const u = new User({ name, sex, age, userID, userPW })
     u.save()
       .then(r => {
         res.send({ success: true, msg: r })

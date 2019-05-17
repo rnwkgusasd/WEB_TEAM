@@ -20,9 +20,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', (req, res, next) => {
-
-    const { name, sex, userID, userPW } = req.body
-    const u = new Signup({ name, sex, userID, userPW })
+    const { name, sex, age, userID, userPW } = req.body
+    const u = new Signup({ name, sex, age, userID, userPW })
       u.save()
         .then(r => {
           res.send({ success: true, msg: r })
@@ -30,6 +29,10 @@ router.post('/', (req, res, next) => {
         .catch(e => {
           res.send({ success: false, msg: e.message })
         })
+  
+    console.log(req.query)
+    console.log(req.body)
+    res.send({ success: true, msg: 'post ok' })
   });
 
 router.all('*', function(req, res, next) {
