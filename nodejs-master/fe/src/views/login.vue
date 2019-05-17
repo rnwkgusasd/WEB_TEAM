@@ -60,7 +60,6 @@ export default {
       })
       .catch((e) => {
         console.error(e.message)
-        
       })
     },
     login() {
@@ -68,8 +67,9 @@ export default {
       let selectUser = null
       console.log(this.allUsers)
       this.allUsers.forEach(user =>{
-        console.log(user.userID)
-        if(user.userID === this.email) selectUser = user
+        if(user.userID === this.email){
+          selectUser = user
+        }
       })
       if (selectUser === null) alert('입력하신 이메일이 없습니다')
         else{
